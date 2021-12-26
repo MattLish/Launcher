@@ -149,7 +149,9 @@ const prepareForLaunch = async (): Promise<boolean> => {
     }
   }
 
-  await setResolution();
+  if (userPreferences.get(USER_PREFERENCE_KEYS.MANAGE_RESOLUTION)) {
+    await setResolution();
+  }
 
   logger.debug(`User configuration: ${JSON.stringify(userPreferences.store)}`);
 

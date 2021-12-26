@@ -33,6 +33,29 @@
             Open
           </BaseButton>
         </div>
+        <div class="l-row c-settings__actions">
+          <div class="c-settings__label" id="enb-text">Manage ENB</div>
+          <BaseButton
+            v-bind:class="{
+              'c-button--primary': manageEnb,
+              'c-button--warning': !manageEnb,
+            }"
+            @click="toggleEnb"
+            >Toggle</BaseButton
+          >
+        </div>
+        <div class="l-row c-settings__actions" id="resolution-text">
+          <div class="c-settings__label">Manage Resolution</div>
+          <BaseButton
+            v-bind:class="{
+              'c-button--primary': manageResolution,
+              'c-button--warning': !manageResolution,
+            }"
+            @click="toggleResolution"
+          >
+            Toggle
+          </BaseButton>
+        </div>
       </div>
     </AppPageContent>
   </AppPage>
@@ -73,6 +96,10 @@ import {
 })
 export default class Settings extends Vue {
   private eventService!: EventService;
+  private manageEnb = userPreferences.get(USER_PREFERENCE_KEYS.MANAGE_ENB);
+  private manageResolution = userPreferences.get(
+    USER_PREFERENCE_KEYS.MANAGE_RESOLUTION
+  );
 
   created() {
     this.eventService = injectStrict(SERVICE_BINDINGS.EVENT_SERVICE);
@@ -168,6 +195,28 @@ export default class Settings extends Vue {
         error: `Crash logs directory at ${crashLogPath} does not exist. This likely means you do not have any crash logs.`,
       });
     }
+  }
+
+  toggleEnb() {
+    userPreferences.set(
+      USER_PREFERENCE_KEYS.MANAGE_ENB,
+      !userPreferences.get(USER_PREFERENCE_KEYS.MANAGE_ENB)
+    );
+    logger.info(
+      "Toggled manage enb to " +
+        userPreferences.get(USER_PREFERENCE_KEYS.MANAGE_ENB)
+    );
+  }
+
+  toggleResolution() {
+    userPreferences.set(
+      USER_PREFERENCE_KEYS.MANAGE_RESOLUTION,
+      !userPreferences.get(USER_PREFERENCE_KEYS.MANAGE_RESOLUTION)
+    );
+    logger.info(
+      "Toggled manage resolution to " +
+        userPreferences.get(USER_PREFERENCE_KEYS.MANAGE_RESOLUTION)
+    );
   }
 }
 </script>

@@ -12,15 +12,25 @@ export enum USER_PREFERENCE_KEYS {
   ENB_PROFILE = "ENB_PROFILE",
   PREVIOUS_ENB_PROFILE = "PREVIOUS_ENB_PROFILE",
   RESOLUTION = "RESOLUTION",
+  MANAGE_ENB = "MANAGE_ENB",
+  MANAGE_RESOLUTION = "MANAGE_RESOLUTION",
 }
 
 export interface UserPreferences {
   [USER_PREFERENCE_KEYS.MOD_DIRECTORY]: string;
   [USER_PREFERENCE_KEYS.PRESET]: string;
+  [USER_PREFERENCE_KEYS.MANAGE_ENB]: boolean;
+  [USER_PREFERENCE_KEYS.MANAGE_RESOLUTION]: boolean;
 }
 
 export const userPreferences = new Store<UserPreferences>({
   name: "userPreferences",
+  defaults: {
+    [USER_PREFERENCE_KEYS.MOD_DIRECTORY]: "",
+    [USER_PREFERENCE_KEYS.PRESET]: "",
+    [USER_PREFERENCE_KEYS.MANAGE_ENB]: true,
+    [USER_PREFERENCE_KEYS.MANAGE_RESOLUTION]: true,
+  },
 });
 
 export const skyrimDirectory = () =>

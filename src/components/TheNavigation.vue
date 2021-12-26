@@ -7,9 +7,9 @@
 
       <ProfileSelection />
 
-      <ENB />
+      <ENB v-if="showEnb" />
 
-      <Resolution />
+      <Resolution v-if="showResolution" />
     </div>
 
     <div class="c-navigation__content l-column l-space-between">
@@ -111,6 +111,10 @@ import { logger } from "@/main/logger";
 export default class TheNavigation extends Vue {
   private eventService!: EventService;
   private gameRunning = false;
+  private showResolution = userPreferences.get(
+    USER_PREFERENCE_KEYS.MANAGE_RESOLUTION
+  );
+  private showEnb = userPreferences.get(USER_PREFERENCE_KEYS.MANAGE_ENB);
 
   launcherVersion = launcherVersion;
 

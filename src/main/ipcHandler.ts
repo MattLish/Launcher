@@ -102,9 +102,11 @@ export function registerHandlers() {
     return true;
   });
 
-  ipcMain.handle(IPCEvents.COPY_ENB_FILES, async () =>
-    copyENBFiles(userPreferences.get(USER_PREFERENCE_KEYS.ENB_PROFILE))
-  );
+  ipcMain.handle(IPCEvents.COPY_ENB_FILES, async () => {
+    if (userPreferences.get(USER_PREFERENCE_KEYS.MANAGE_ENB)) {
+      copyENBFiles(userPreferences.get(USER_PREFERENCE_KEYS.ENB_PROFILE));
+    }
+  });
 
   ipcMain.handle(IPCEvents.RESTORE_ENB_PRESETS, async () => {
     await restoreENBPresets();
