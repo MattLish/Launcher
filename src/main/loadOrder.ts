@@ -42,6 +42,10 @@ const uploadList = async (profile: string) => {
 
 export const buildCustomized = async () => {
   const profile = userPreferences.get(USER_PREFERENCE_KEYS.PRESET);
+  if (!(profile in profileDict)) {
+    logger.debug("Selected profile is not a default profile");
+    return true;
+  }
   const uploadResponse = await uploadList(profile);
   const listUrl = uploadResponse["data"]["url"];
   logger.debug(`List URL: ${listUrl}`);
@@ -55,6 +59,16 @@ export const buildCustomized = async () => {
       },
     }
   );
-  const differences = (await response.json())["data"]["differences"];
-  return differences.length != 0;
+  const res = await response.json();
+  if (!("data" in res)) {
+    logger.debug(`LoL Error: ${res["Message"]}`);
+    return null;
+  }
+  logger.debug(`Comparison URL: ${res["links"]["url"]}`);
+  let customized = false;
+  const differences = res["data"]["differences"];
+  for (const [key, value] of Object.entries(differences)) {
+    if (value != null) customized = true;
+  }
+  return customized;
 };
