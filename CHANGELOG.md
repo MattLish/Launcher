@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## 2.0.0 (2022-06-18)
+
+
+### ⚠ BREAKING CHANGES
+
+* C++ 2022 will now be installed in C++ 2019 or greater
+is not installed
+
+### Features
+
+* install prerequisites on game launch ([5fb917b](https://github.com/Wildlander-mod/Launcher/commit/5fb917b8f5f36acde6298bdf9077f7f4a799f2aa))
+
 ### 1.1.2 (2022-04-10)
 
 ### 1.1.1 (2022-04-10)
